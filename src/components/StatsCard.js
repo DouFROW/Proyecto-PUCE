@@ -6,18 +6,24 @@ const StatsCard = ({ icon: Icon, title, number, subtitle, sx }) => {
   const theme = useTheme();
 
   return (
-    <Card sx={{ textAlign: 'center', p: 3, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' }, ...sx }}>
-      <CardContent sx={{ p: 0 }}>
-        <Box sx={{ fontSize: '2.5rem', color: theme.palette.primary.main, mb: 2 }}>
-          {Icon ? <Icon /> : null} {/* Safeguard: Skip if Icon is undefined */}
+    <Card sx={{ 
+      textAlign: 'center', 
+      p: 2, 
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      borderRadius: '4px',
+      ...sx 
+    }}>
+      <CardContent sx={{ p: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{ fontSize: '2rem', color: '#0056b3', mb: 1 }}>
+          {Icon ? <Icon /> : null}
         </Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
           {title}
         </Typography>
-        <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', color: theme.palette.primary.main, mb: 1 }}>
+        <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', color: '#0056b3', mb: 0.5 }}>
           {number}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="caption" color="text.secondary">
           {subtitle}
         </Typography>
       </CardContent>

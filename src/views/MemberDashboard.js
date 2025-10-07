@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, Button, Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, Button, Box, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import StatsCard from '../components/StatsCard';
@@ -7,7 +7,13 @@ import LoanTable from '../components/LoanTable';
 import QuickActions from '../components/QuickActions';
 import WelcomeHeader from '../components/WelcomeHeader';
 import LoanModal from '../components/LoanModal';
-import { AccountBalance, Event, Savings, History } from '@mui/icons-material'; // Ensure all icons imported
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import EventIcon from '@mui/icons-material/Event';
+import SavingsIcon from '@mui/icons-material/Savings';
+import HistoryIcon from '@mui/icons-material/History';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -15,10 +21,10 @@ const MemberDashboard = ({ activeNav }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const stats = [
-    { icon: AccountBalance, title: 'Préstamo Actual', number: '$5,000', subtitle: 'Quedan 12 cuotas' },
-    { icon: Event, title: 'Próximo Pago', number: '$350.50', subtitle: 'Vence 05/09/2023' },
-    { icon: Savings, title: 'Ahorros', number: '$2,840', subtitle: '+$120 este mes' },
-    { icon: History, title: 'Préstamos Pagados', number: '2', subtitle: 'Total $8,500' },
+    { icon: AccountBalanceIcon, title: 'Préstamo Actual', number: '$5,000', subtitle: 'Quedan 12 cuotas' },
+    { icon: EventIcon, title: 'Próximo Pago', number: '$350.50', subtitle: 'Vence 05/09/2023' },
+    { icon: SavingsIcon, title: 'Ahorros', number: '$2,840', subtitle: '+$120 este mes' },
+    { icon: HistoryIcon, title: 'Préstamos Pagados', number: '2', subtitle: 'Total $8,500' },
   ];
 
   const loanRows = [
@@ -56,29 +62,30 @@ const MemberDashboard = ({ activeNav }) => {
   ];
 
   return (
-    <>
+    <Box sx={{ p: 3, backgroundColor: '#f5f5f5' }}>
       <WelcomeHeader title="Bienvenido, Juan Pérez" subtitle="Número de socio: #AET-0248" />
       <Grid container spacing={3}>
         {stats.map((stat, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}> {/* Updated: No 'item', use 'size' object */}
+          <Grid item xs={12} sm={6} md={3} key={index}>
             <StatsCard {...stat} />
           </Grid>
         ))}
       </Grid>
       <Grid container spacing={3} sx={{ mt: 4 }}>
-        <Grid size={{ xs: 12, md: 8 }}> {/* Updated: No 'item', use 'size' */}
-          <Card>
+        <Grid item xs={12} md={8}>
+          <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
             <CardHeader
-              title="Mis Préstamos"
+              title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Mis Préstamos</Typography>}
               action={<Button variant="contained" color="primary" onClick={() => setModalOpen(true)}>Solicitar Préstamo</Button>}
-              titleTypographyProps={{ variant: 'h6' }}
             />
+            <Divider />
             <CardContent>
               <LoanTable rows={loanRows} isAdmin={false} />
             </CardContent>
           </Card>
-          <Card sx={{ mt: 3 }}>
-            <CardHeader title="Próximos Pagos" titleTypographyProps={{ variant: 'h6' }} />
+          <Card sx={{ mt: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Próximos Pagos</Typography>} />
+            <Divider />
             <CardContent>
               <Box sx={{ height: 300 }}>
                 <Line data={paymentData} options={chartOptions} />
@@ -86,10 +93,17 @@ const MemberDashboard = ({ activeNav }) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }}> {/* Updated: No 'item', use 'size' */}
-          <QuickActions onLoanRequest={() => setModalOpen(true)} isAdmin={false} />
-          <Card sx={{ mt: 3 }}>
-            <CardHeader title="Documentos Recientes" titleTypographyProps={{ variant: 'h6' }} />
+        <Grid item xs={12} md={4}>
+          <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Acciones Rápidas</Typography>} />
+            <Divider />
+            <CardContent>
+              <QuickActions onLoanRequest={() => setModalOpen(true)} isAdmin={false} />
+            </CardContent>
+          </Card>
+          <Card sx={{ mt: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Documentos Recientes</Typography>} />
+            <Divider />
             <CardContent>
               <List>
                 {documents.map((doc, index) => (
@@ -97,7 +111,7 @@ const MemberDashboard = ({ activeNav }) => {
                     <ListItemText
                       primary={
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Typography variant="subtitle1">{doc.title}</Typography>
+                          <Typography variant="subtitle1" sx={{ fontWeight: 'medium', color: '#0056b3' }}>{doc.title}</Typography>
                           <Typography variant="body2" color="text.secondary">{doc.date}</Typography>
                         </Box>
                       }
@@ -111,7 +125,7 @@ const MemberDashboard = ({ activeNav }) => {
         </Grid>
       </Grid>
       <LoanModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    </>
+    </Box>
   );
 };
 

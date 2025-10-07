@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Badge, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 
 const Navbar = ({ currentView, onSwitchView }) => {
@@ -13,24 +13,33 @@ const Navbar = ({ currentView, onSwitchView }) => {
     setAnchorEl(null);
   };
 
-  const userType = currentView === 'admin' ? 'Administrador' : 'Socio';
+  const userType = currentView === 'admin' ? 'Admin' : 'User';
   const switchText = currentView === 'admin' ? 'Cambiar a Vista de Socio' : 'Cambiar a Vista de Administrador';
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', color: 'black' }}>
+      <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', color: 'black', zIndex: 1201 }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
             Sistema AETPUCE
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Badge badgeContent={userType} color="info" sx={{ position: 'relative', mr: 2, top: 0, right: 0 }}>
-              <span>{userType}</span>
-            </Badge>
-            <IconButton onClick={handleMenu} sx={{ ml: 1 }}>
-              <Avatar alt="User " src="#" sx={{ width: 32, height: 32 }} />
-            </IconButton>
-            <Typography variant="body2" sx={{ mr: 2 }}>Admin User</Typography>
+            <Button 
+              variant="contained" 
+              size="small" 
+              onClick={onSwitchView}
+              sx={{ 
+                backgroundColor: '#17a2b8', 
+                '&:hover': { backgroundColor: '#138496' },
+                mr: 1,
+                textTransform: 'none',
+                borderRadius: '4px',
+                fontSize: '0.75rem',
+                padding: '2px 8px'
+              }}
+            >
+              {userType}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
