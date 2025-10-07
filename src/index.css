@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Custom hover for stats cards (already in component, but global if needed) */
+.MuiCard-root:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
