@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import { Box, CssBaseline, useMediaQuery } from '@mui/material';
+
+// Componentes de navegación
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import MobileNavbar from './components/MobileNavbar';
 
-// Importar vistas existentes
+// Vistas de usuario
 import AdminDashboard from './views/AdminDashboard';
 import MemberDashboard from './views/MemberDashboard';
 
-// Importar las nuevas vistas
+// Páginas internas
 import DocumentsPage from './pages/DocumentsPage';
 import LoansPage from './pages/LoansPage';
 import ReportsPage from './pages/ReportsPage';
-import ContabPage from "./pages/ContabPage";
-import GroupPage from "./pages/GroupPage";
-import AdminsPage from "./pages/AdminsPage";
-
+import ContabPage from './pages/ContabPage';
+import GroupPage from './pages/GroupPage';
+import AdminsPage from './pages/AdminsPage';
 
 function App() {
+  // Estado para controlar tipo de usuario y vista activa
   const [currentView, setCurrentView] = useState('admin'); // 'admin' o 'member'
-  const [activeNav, setActiveNav] = useState('dashboard'); // Vista activa en sidebar/navbar
+  const [activeNav, setActiveNav] = useState('dashboard'); // vista activa en sidebar/navbar
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('lg'));
 
-  // Cambiar entre vistas admin/member
+  // Cambiar entre vistas admin / member
   const handleViewSwitch = () => {
     setCurrentView(prev => (prev === 'admin' ? 'member' : 'admin'));
   };
@@ -44,12 +46,14 @@ function App() {
           return <LoansPage />;
         case 'reportes':
           return <ReportsPage />;
-          case "contabilidad":
-            return <ContabPage />;
-        case "socios":
-            return <GroupPage />;
-        case "administracion":
-            return <AdminsPage />;
+        case 'contabilidad':
+          return <ContabPage />;
+        case 'socios':
+          return <GroupPage />;
+        case 'administracion':
+          return <AdminsPage />;
+        default:
+          return <AdminDashboard />;
       }
     } else {
       switch (activeNav) {
@@ -61,10 +65,12 @@ function App() {
           return <LoansPage />;
         case 'reportes':
           return <ReportsPage />;
-        case "contabilidad":
-            return <ContabPage />;
-        case "administracion":
-            return <AdminsPage />;
+        case 'contabilidad':
+          return <ContabPage />;
+        case 'administracion':
+          return <AdminsPage />;
+        default:
+          return <MemberDashboard />;
       }
     }
   };
