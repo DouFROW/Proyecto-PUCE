@@ -97,8 +97,7 @@ function App() {
         sx={{
           flexGrow: 1,
           p: { xs: 2, lg: 3 },
-          pt: { xs: 10, lg: 12 }, // espacio para navbar fija
-          ml: { lg: 30 }, // ancho del sidebar (~240px)
+          pt: { xs: 10, lg: 12 }, // espacio para navbar fija // ancho del sidebar (~240px)
           backgroundColor: '#f5f5f5',
           transition: 'all 0.3s ease-in-out',
         }}
