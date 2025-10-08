@@ -42,7 +42,7 @@ import {
 } from 'recharts';
 
 const AnnualDiscountReportPage = () => {
-  const [selectedYear, setSelectedYear] = useState('2023');
+
 
   // Sample data for charts
   const monthlyDiscounts = [
@@ -83,8 +83,20 @@ const AnnualDiscountReportPage = () => {
     { socio: 'Luis Vásquez', departamento: 'Mantenimiento', descuentos: 3200, prestamos: 1 }
   ];
 
-  const years = ['2023', '2022', '2021', '2020'];
-
+  // Function to get current year and past 5 years
+  const getYearsList = () => {
+    const currentYear = new Date().getFullYear();
+    const yearsList = [];
+    
+    for (let i = 0; i < 5; i++) {
+      yearsList.push((currentYear - i).toString());
+    }
+    
+    return yearsList;
+  };
+  
+  const years = getYearsList();
+  const [selectedYear, setSelectedYear] = useState(years [0]);
   const handlePrintReport = () => {
     window.print();
   };
