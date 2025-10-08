@@ -6,7 +6,8 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import GroupIcon from '@mui/icons-material/Group';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const drawerWidth = 260;
 
@@ -24,7 +25,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
   const adminItems = [
     { icon: MonetizationOnIcon, label: 'Contabilidad', view: 'contabilidad' },
     { icon: GroupIcon, label: 'Socios', view: 'socios' },
-    { icon: SupervisorAccountIcon, label: 'Administración', view: 'administracion' },
+    { icon: SettingsIcon, label: 'Administración', view: 'administracion' },
   ];
 
   return (
