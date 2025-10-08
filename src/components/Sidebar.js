@@ -6,7 +6,6 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import GroupIcon from '@mui/icons-material/Group';
-
 import SettingsIcon from '@mui/icons-material/Settings';
 
 const drawerWidth = 260;
