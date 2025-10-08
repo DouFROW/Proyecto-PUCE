@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, Button, Box, Typography } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, Button, Box} from '@mui/material';
 import StatsCard from '../components/StatsCard';
 import LoanTable from '../components/LoanTable';
 import QuickActions from '../components/QuickActions';
@@ -10,7 +10,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import WelcomeHeader from '../components/WelcomeHeader';
 
-const AdminDashboard = ({ activeNav }) => {
+const AdminDashboard = ({ admin }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const stats = [

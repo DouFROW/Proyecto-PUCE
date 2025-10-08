@@ -1,24 +1,24 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, useTheme } from '@mui/material';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import GroupIcon from '@mui/icons-material/Group';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Groups2Icon from '@mui/icons-material/Groups2';
+import CalculateIcon from '@mui/icons-material/Calculate';
 
-const drawerWidth = 250;
+const drawerWidth = 260;
+
 
 function Sidebar({ activeNav, onNavClick, isAdmin }) {
-  const theme = useTheme();
+  
 
   // Using imported icons directly
 
   // Common navigation items for both admin and members
   const navItems = [
-    { icon: HomeIcon, label: 'Inicio', view: 'dashboard' },
+    { icon: HomeIcon, label: 'Inicio', view: "co" },
     { icon: DescriptionIcon, label: 'Documentos', view: 'documents' },
     { icon: AccountBalanceIcon, label: 'Préstamos', view: 'loans' },
     { icon: BarChartIcon, label: 'Reportes', view: 'reports' },
@@ -26,9 +26,9 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
 
   // Admin-specific navigation items
   const adminItems = [
-    { icon: MonetizationOnIcon, label: 'Contabilidad', view: 'accounting' },
-    { icon: GroupIcon, label: 'Socios', view: 'members' },
-    { icon: SupervisorAccountIcon, label: 'Administración', view: 'admin' },
+    { icon: CalculateIcon, label: 'Contabilidad', view: 'accounting' },
+    { icon: Groups2Icon, label: 'Socios', view: 'members' },
+    { icon: SettingsIcon, label: 'Administración', view: 'admin' },
   ];
 
   return (
