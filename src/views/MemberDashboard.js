@@ -11,9 +11,6 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import RequestPageIcon from '@mui/icons-material/RequestPage';
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
