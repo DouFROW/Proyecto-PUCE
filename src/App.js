@@ -18,6 +18,21 @@ import ContabPage from './pages/ContabPage';
 import GroupPage from './pages/GroupPage';
 import AdminsPage from './pages/AdminsPage';
 
+// Nuevas páginas de gestión de socios
+import AddMemberPage from './pages/AddMemberPage';
+import DeactivateMemberPage from './pages/DeactivateMemberPage';
+import ViewActiveMembersPage from './pages/ViewActiveMembersPage';
+
+// Nuevas páginas de gestión de préstamos
+import ViewActiveLoansPage from './pages/ViewActiveLoansPage';
+import ViewLoanApplicationsPage from './pages/ViewLoanApplicationsPage';
+import ViewCanceledLoansPage from './pages/ViewCanceledLoansPage';
+import LoansByMemberPage from './pages/LoansByMemberPage';
+
+// Nuevas páginas de gestión de descuentos
+import AnnualDiscountReportPage from './pages/AnnualDiscountReportPage';
+import MonthlyDiscountReportPage from './pages/MonthlyDiscountReportPage';
+
 function App() {
   // Estado para controlar tipo de usuario y vista activa
   const [currentView, setCurrentView] = useState('admin'); // 'admin' o 'usuario'
@@ -52,6 +67,31 @@ function App() {
           return <GroupPage />;
         case 'administracion':
           return <AdminsPage />;
+        
+        // Gestión de Socios
+        case 'add-member':
+          return <AddMemberPage />;
+        case 'deactivate-member':
+          return <DeactivateMemberPage />;
+        case 'view-active-members':
+          return <ViewActiveMembersPage />;
+        
+        // Gestión de Préstamos
+        case 'view-active-loans':
+          return <ViewActiveLoansPage />;
+        case 'view-loan-applications':
+          return <ViewLoanApplicationsPage />;
+        case 'view-canceled-loans':
+          return <ViewCanceledLoansPage />;
+        case 'loans-by-member':
+          return <LoansByMemberPage />;
+        
+        // Gestión de Descuentos
+        case 'annual-discount-report':
+          return <AnnualDiscountReportPage />;
+        case 'monthly-discount-report':
+          return <MonthlyDiscountReportPage />;
+        
         default:
           return <AdminDashboard />;
       }

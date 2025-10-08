@@ -1,18 +1,16 @@
 import React from 'react';
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
-import { Home, Description, AccountBalance, BarChart, Groups, AdminPanelSettings } from '@mui/icons-material';
+import { Home, Description, AccountBalance, BarChart, Groups, AdminPanelSettings, PersonAdd, Assessment } from '@mui/icons-material';
 
 const MobileNavbar = ({ activeNav, onNavClick, isAdmin }) => {
   // Items según tipo de usuario
   const navItems = isAdmin
     ? [
         { label: 'Inicio', icon: Home, view: 'dashboard' },
-        { label: 'Documentos', icon: Description, view: 'documentos' },
-        { label: 'Préstamos', icon: AccountBalance, view: 'prestamos' },
-        { label: 'Reportes', icon: BarChart, view: 'reportes' },
-        { label: 'Contabilidad', icon: AccountBalance, view: 'contabilidad' },
-        { label: 'Socios', icon: Groups, view: 'socios' },
-        { label: 'Administración', icon: AdminPanelSettings, view: 'administracion' },
+        { label: 'Socios', icon: Groups, view: 'view-active-members' },
+        { label: 'Préstamos', icon: AccountBalance, view: 'view-active-loans' },
+        { label: 'Descuentos', icon: Assessment, view: 'monthly-discount-report' },
+        { label: 'Admin', icon: AdminPanelSettings, view: 'administracion' },
       ]
     : [
         { label: 'Inicio', icon: Home, view: 'dashboard' },

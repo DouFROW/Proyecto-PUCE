@@ -1,0 +1,503 @@
+import React, { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Card,
+  CardHeader,
+  CardContent,
+  Grid,
+  Button,
+  Stack,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Chip,
+  TextField,
+  InputAdornment,
+  Alert,
+  Divider
+} from '@mui/material';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PrintIcon from '@mui/icons-material/Print';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import SearchIcon from '@mui/icons-material/Search';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import WarningIcon from '@mui/icons-material/Warning';
+
+const MonthlyDiscountReportPage = () => {
+  const [selectedMonth, setSelectedMonth] = useState('09');
+  const [selectedYear, setSelectedYear] = useState('2023');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Sample data for monthly report
+  const monthlyData = [
+    {
+      socio: 'Juan Pérez',
+      socioId: '#AET-0248',
+      departamento: 'Administración',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$350.50',
+      totalDescuento: '$377.30',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Descuento aplicado correctamente'
+    },
+    {
+      socio: 'María González',
+      socioId: '#AET-0185',
+      departamento: 'Contabilidad',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$350.50',
+      totalDescuento: '$377.30',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Descuento aplicado correctamente'
+    },
+    {
+      socio: 'Carlos Mendoza',
+      socioId: '#AET-0212',
+      departamento: 'Sistemas',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$0.00',
+      totalDescuento: '$26.80',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Solo cuota fija'
+    },
+    {
+      socio: 'Ana Torres',
+      socioId: '#AET-0198',
+      departamento: 'Recursos Humanos',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$490.70',
+      totalDescuento: '$517.50',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Descuento aplicado correctamente'
+    },
+    {
+      socio: 'Luis Vásquez',
+      socioId: '#AET-0154',
+      departamento: 'Mantenimiento',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$285.75',
+      totalDescuento: '$312.55',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Descuento aplicado correctamente'
+    },
+    {
+      socio: 'Patricia López',
+      socioId: '#AET-0195',
+      departamento: 'Administración',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$0.00',
+      totalDescuento: '$26.80',
+      estado: 'Pendiente',
+      fechaAplicacion: 'Pendiente',
+      observaciones: 'Falta documentación'
+    },
+    {
+      socio: 'Miguel Torres',
+      socioId: '#AET-0201',
+      departamento: 'Sistemas',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$420.50',
+      totalDescuento: '$447.30',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Descuento aplicado correctamente'
+    },
+    {
+      socio: 'Rosa Méndez',
+      socioId: '#AET-0218',
+      departamento: 'Contabilidad',
+      cuotaFija: '$26.80',
+      descuentoPrestamo: '$0.00',
+      totalDescuento: '$26.80',
+      estado: 'Aplicado',
+      fechaAplicacion: '15/09/2023',
+      observaciones: 'Solo cuota fija'
+    }
+  ];
+
+  const months = [
+    { value: '01', label: 'Enero' },
+    { value: '02', label: 'Febrero' },
+    { value: '03', label: 'Marzo' },
+    { value: '04', label: 'Abril' },
+    { value: '05', label: 'Mayo' },
+    { value: '06', label: 'Junio' },
+    { value: '07', label: 'Julio' },
+    { value: '08', label: 'Agosto' },
+    { value: '09', label: 'Septiembre' },
+    { value: '10', label: 'Octubre' },
+    { value: '11', label: 'Noviembre' },
+    { value: '12', label: 'Diciembre' }
+  ];
+
+  const years = ['2023', '2022', '2021', '2020'];
+
+  const filteredData = monthlyData.filter(member =>
+    member.socio.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    member.socioId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    member.departamento.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Aplicado': return 'success';
+      case 'Pendiente': return 'warning';
+      case 'Error': return 'error';
+      default: return 'default';
+    }
+  };
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'Aplicado': return <CheckCircleIcon />;
+      case 'Pendiente': return <WarningIcon />;
+      case 'Error': return <WarningIcon />;
+      default: return null;
+    }
+  };
+
+  const handlePrintReport = () => {
+    window.print();
+  };
+
+  const handleExportPDF = () => {
+    console.log('Exporting monthly discount report to PDF...');
+  };
+
+  // Calculate totals
+  const totalCuotaFija = filteredData.reduce((sum, member) => {
+    return sum + parseFloat(member.cuotaFija.replace('$', ''));
+  }, 0);
+
+  const totalDescuentoPrestamo = filteredData.reduce((sum, member) => {
+    return sum + parseFloat(member.descuentoPrestamo.replace('$', ''));
+  }, 0);
+
+  const totalDescuento = filteredData.reduce((sum, member) => {
+    return sum + parseFloat(member.totalDescuento.replace('$', ''));
+  }, 0);
+
+  const aplicados = filteredData.filter(member => member.estado === 'Aplicado').length;
+  const pendientes = filteredData.filter(member => member.estado === 'Pendiente').length;
+
+  return (
+    <Box sx={{ p: 3 }}>
+      <Stack direction="row" alignItems="center" spacing={2} mb={3}>
+        <ReceiptIcon sx={{ fontSize: 32, color: '#0056b3' }} />
+        <Typography variant="h4" fontWeight="bold" color="#0056b3">
+          Reporte Mensual de Descuentos
+        </Typography>
+      </Stack>
+
+      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mb: 3 }}>
+        <CardHeader 
+          title="Configuración del Reporte" 
+          sx={{ backgroundColor: '#0056b3', color: 'white' }}
+        />
+        <CardContent>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} md={2}>
+              <FormControl fullWidth>
+                <InputLabel>Mes</InputLabel>
+                <Select
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                  label="Mes"
+                >
+                  {months.map((month) => (
+                    <MenuItem key={month.value} value={month.value}>
+                      {month.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <FormControl fullWidth>
+                <InputLabel>Año</InputLabel>
+                <Select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                  label="Año"
+                >
+                  {years.map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                placeholder="Buscar socio..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon color="action" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Stack direction="row" spacing={1} justifyContent="flex-end">
+                <Button
+                  variant="outlined"
+                  startIcon={<PrintIcon />}
+                  onClick={handlePrintReport}
+                  sx={{ color: '#0056b3', borderColor: '#0056b3' }}
+                >
+                  Imprimir
+                </Button>
+                <Button
+                  variant="outlined"
+                  startIcon={<PictureAsPdfIcon />}
+                  onClick={handleExportPDF}
+                  sx={{ color: '#0056b3', borderColor: '#0056b3' }}
+                >
+                  Exportar PDF
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      {/* Resumen del Mes */}
+      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mb: 3 }}>
+        <CardHeader 
+          title={`Resumen del Mes - ${months.find(m => m.value === selectedMonth)?.label} ${selectedYear}`}
+          sx={{ backgroundColor: '#0056b3', color: 'white' }}
+        />
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={3}>
+              <Box sx={{ textAlign: 'center', p: 2, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                <Typography variant="h4" color="primary" fontWeight="bold">
+                  ${totalCuotaFija.toFixed(2)}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Total Cuota Fija
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box sx={{ textAlign: 'center', p: 2, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                <Typography variant="h4" color="success.main" fontWeight="bold">
+                  ${totalDescuentoPrestamo.toFixed(2)}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Descuentos Préstamos
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box sx={{ textAlign: 'center', p: 2, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                <Typography variant="h4" color="warning.main" fontWeight="bold">
+                  ${totalDescuento.toFixed(2)}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Total Descuentos
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box sx={{ textAlign: 'center', p: 2, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                <Typography variant="h4" color="info.main" fontWeight="bold">
+                  {filteredData.length}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Socios Procesados
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Divider sx={{ my: 2 }} />
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Alert severity="success" icon={<CheckCircleIcon />}>
+                <Typography variant="body2">
+                  <strong>{aplicados}</strong> descuentos aplicados correctamente
+                </Typography>
+              </Alert>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {pendientes > 0 && (
+                <Alert severity="warning" icon={<WarningIcon />}>
+                  <Typography variant="body2">
+                    <strong>{pendientes}</strong> descuentos pendientes de aplicación
+                  </Typography>
+                </Alert>
+              )}
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+
+      {/* Tabla de Descuentos */}
+      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+        <CardHeader 
+          title={`Descuentos Aplicados - ${months.find(m => m.value === selectedMonth)?.label} ${selectedYear}`}
+          sx={{ backgroundColor: '#0056b3', color: 'white' }}
+        />
+        <CardContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Socio</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Departamento</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Cuota Fija</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Descuento Préstamo</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Total Descuento</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Estado</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Fecha Aplicación</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Observaciones</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredData.map((member, index) => (
+                  <TableRow key={index} hover>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="medium">
+                        {member.socio}
+                      </Typography>
+                      <Typography variant="caption" color="textSecondary">
+                        {member.socioId}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>{member.departamento}</TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="medium">
+                        {member.cuotaFija}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="medium">
+                        {member.descuentoPrestamo}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body2" fontWeight="bold" color="primary">
+                        {member.totalDescuento}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        icon={getStatusIcon(member.estado)}
+                        label={member.estado}
+                        color={getStatusColor(member.estado)}
+                        size="small"
+                      />
+                    </TableCell>
+                    <TableCell>{member.fechaAplicacion}</TableCell>
+                    <TableCell>
+                      <Typography variant="body2" sx={{ maxWidth: 200 }}>
+                        {member.observaciones}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          {filteredData.length === 0 && (
+            <Box sx={{ textAlign: 'center', py: 4 }}>
+              <Typography variant="h6" color="textSecondary">
+                No se encontraron registros
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {searchTerm 
+                  ? 'Intenta con otros términos de búsqueda' 
+                  : 'No hay descuentos para el período seleccionado'}
+              </Typography>
+            </Box>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Desglose de Cuota Fija */}
+      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mt: 3 }}>
+        <CardHeader 
+          title="Desglose de Cuota Fija Mensual"
+          sx={{ backgroundColor: '#0056b3', color: 'white' }}
+        />
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom sx={{ color: '#0056b3' }}>
+                Componentes de la Cuota Fija ($26.80)
+              </Typography>
+              <Stack spacing={2}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Ahorro:</Typography>
+                  <Typography variant="body2" fontWeight="bold">$6.70</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Administración:</Typography>
+                  <Typography variant="body2" fontWeight="bold">$13.80</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Administración:</Typography>
+                  <Typography variant="body2" fontWeight="bold">$6.70</Typography>
+                </Box>
+                <Divider />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#e3f2fd', borderRadius: 1 }}>
+                  <Typography variant="body2" fontWeight="bold">Total:</Typography>
+                  <Typography variant="body2" fontWeight="bold" color="primary">$26.80</Typography>
+                </Box>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom sx={{ color: '#0056b3' }}>
+                Resumen del Mes
+              </Typography>
+              <Stack spacing={2}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Socios procesados:</Typography>
+                  <Typography variant="body2" fontWeight="bold">{filteredData.length}</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Cuota fija por socio:</Typography>
+                  <Typography variant="body2" fontWeight="bold">$26.80</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+                  <Typography variant="body2">Total cuotas fijas:</Typography>
+                  <Typography variant="body2" fontWeight="bold">${totalCuotaFija.toFixed(2)}</Typography>
+                </Box>
+                <Divider />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 1, backgroundColor: '#e8f5e8', borderRadius: 1 }}>
+                  <Typography variant="body2" fontWeight="bold">Total general:</Typography>
+                  <Typography variant="body2" fontWeight="bold" color="success.main">${totalDescuento.toFixed(2)}</Typography>
+                </Box>
+              </Stack>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Box>
+  );
+};
+
+export default MonthlyDiscountReportPage;
