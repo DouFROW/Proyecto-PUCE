@@ -7,10 +7,10 @@ import LoanTable from '../components/LoanTable';
 import QuickActions from '../components/QuickActions';
 import WelcomeHeader from '../components/WelcomeHeader';
 import LoanModal from '../components/LoanModal';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import EventIcon from '@mui/icons-material/Event';
-import SavingsIcon from '@mui/icons-material/Savings';
-import HistoryIcon from '@mui/icons-material/History';
+import GroupsIcon from '@mui/icons-material/Groups';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import RequestPageIcon from '@mui/icons-material/RequestPage';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -21,10 +21,10 @@ const MemberDashboard = ({ activeNav }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const stats = [
-    { icon: AccountBalanceIcon, title: 'Préstamo Actual', number: '$5,000', subtitle: 'Quedan 12 cuotas' },
-    { icon: EventIcon, title: 'Próximo Pago', number: '$350.50', subtitle: 'Vence 05/09/2023' },
-    { icon: SavingsIcon, title: 'Ahorros', number: '$2,840', subtitle: '+$120 este mes' },
-    { icon: HistoryIcon, title: 'Préstamos Pagados', number: '2', subtitle: 'Total $8,500' },
+    { icon: GroupsIcon, title: 'Datos Personales'},
+    { icon: AttachMoneyIcon, title: 'Préstamos Activos', number: '$350.50', subtitle: 'Vence 05/09/2023' },
+    { icon: RequestPageIcon, title: 'Aportes acumulados', number: '$2,840', subtitle: '+$120 este mes' },
+    { icon: ContentPasteGoIcon, title: 'Próximos descuentos', number: '2', subtitle: 'Total $8,500' },
   ];
 
   const loanRows = [
