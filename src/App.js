@@ -12,6 +12,10 @@ import MemberDashboard from './views/MemberDashboard';
 import DocumentsPage from './pages/DocumentsPage';
 import LoansPage from './pages/LoansPage';
 import ReportsPage from './pages/ReportsPage';
+import ContabPage from "./pages/ContabPage";
+import GroupPage from "./pages/GroupPage";
+import AdminsPage from "./pages/AdminsPage";
+
 
 function App() {
   const [currentView, setCurrentView] = useState('admin'); // 'admin' o 'member'
@@ -40,8 +44,12 @@ function App() {
           return <LoansPage />;
         case 'reportes':
           return <ReportsPage />;
-        default:
-          return <AdminDashboard />;
+          case "contabilidad":
+            return <ContabPage />;
+        case "socios":
+            return <GroupPage />;
+        case "administracion":
+            return <AdminsPage />;
       }
     } else {
       switch (activeNav) {
@@ -53,8 +61,10 @@ function App() {
           return <LoansPage />;
         case 'reportes':
           return <ReportsPage />;
-        default:
-          return <MemberDashboard />;
+        case "contabilidad":
+            return <ContabPage />;
+        case "administracion":
+            return <AdminsPage />;
       }
     }
   };

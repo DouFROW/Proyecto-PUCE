@@ -4,9 +4,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import SettingsIcon from '@mui/icons-material/Settings';
-import Groups2Icon from '@mui/icons-material/Groups2';
-import CalculateIcon from '@mui/icons-material/Calculate';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import GroupIcon from '@mui/icons-material/Group';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
 const drawerWidth = 260;
 
