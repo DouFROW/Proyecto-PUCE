@@ -20,7 +20,7 @@ import AdminsPage from './pages/AdminsPage';
 
 function App() {
   // Estado para controlar tipo de usuario y vista activa
-  const [currentView, setCurrentView] = useState('admin'); // 'admin' o 'member'
+  const [currentView, setCurrentView] = useState('admin'); // 'admin' o 'usuario'
   const [activeNav, setActiveNav] = useState('dashboard'); // vista activa en sidebar/navbar
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('lg'));
 
@@ -97,7 +97,7 @@ function App() {
         sx={{
           flexGrow: 1,
           p: { xs: 2, lg: 3 },
-          pt: { xs: 10, lg: 12 }, // espacio para navbar fija // ancho del sidebar (~240px)
+          pt: { xs: 10, lg: 12 }, 
           backgroundColor: '#f5f5f5',
           transition: 'all 0.3s ease-in-out',
         }}

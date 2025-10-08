@@ -8,16 +8,16 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import GroupIcon from '@mui/icons-material/Group';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-const drawerWidth = 260;
 
+const drawerWidth = 260;
 
 function Sidebar({ activeNav, onNavClick, isAdmin }) {
   // Vistas principales
   const navItems = [
     { icon: HomeIcon, label: 'Inicio', view: 'dashboard' },
-    { icon: DescriptionIcon, label: 'Documentos', view: 'documentos' }, // ← cambio aquí
-    { icon: AccountBalanceIcon, label: 'Préstamos', view: 'prestamos' }, // ← y aquí
-    { icon: BarChartIcon, label: 'Reportes', view: 'reportes' }, // ← y aquí
+    { icon: DescriptionIcon, label: 'Documentos', view: 'documentos' }, 
+    { icon: AccountBalanceIcon, label: 'Préstamos', view: 'prestamos' }, 
+    { icon: BarChartIcon, label: 'Reportes', view: 'reportes' }, 
   ];
 
   // Vistas extra para admin
