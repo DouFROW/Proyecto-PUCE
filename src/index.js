@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css'; // Optional: Add global styles if needed
+import './index.css'; 
 import App from './App';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
