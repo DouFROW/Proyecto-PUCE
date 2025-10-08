@@ -143,7 +143,6 @@ const PartnersManagement = () => {
 
   return (
     <Box sx={{ p: { xs: 2, md: 3 }, maxWidth: 1200, margin: '0 auto' }}>
-      {/* Header */}
       <Typography 
         variant="h4" 
         component="h1" 
@@ -157,7 +156,7 @@ const PartnersManagement = () => {
         Gestión de Socios
       </Typography>
 
-      {/* Listado de Socios Section */}
+
       <Typography 
         variant="h5" 
         component="h2" 
@@ -170,7 +169,6 @@ const PartnersManagement = () => {
         Listado de Socios
       </Typography>
 
-      {/* Search and Filters */}
       <Paper sx={{ p: 2, mb: 3 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={6}>
@@ -206,16 +204,13 @@ const PartnersManagement = () => {
         </Grid>
       </Paper>
 
-      {/* Partners Table/Cards */}
       {isMobile ? (
-        // Mobile View - Cards
         <Box>
           {filteredPartners.map((partner, index) => (
             <MobilePartnerCard key={index} partner={partner} />
           ))}
         </Box>
       ) : (
-        // Desktop View - Table
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="listado de socios">
             <TableHead sx={{ backgroundColor: theme.palette.primary.light }}>
@@ -288,7 +283,7 @@ const PartnersManagement = () => {
         </TableContainer>
       )}
 
-      {/* Empty State */}
+
       {filteredPartners.length === 0 && (
         <Paper sx={{ p: 4, textAlign: 'center', mt: 2 }}>
           <Typography variant="h6" color="textSecondary">

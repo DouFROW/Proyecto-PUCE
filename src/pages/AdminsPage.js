@@ -77,7 +77,6 @@ const SystemConfiguration = () => {
   };
 
   const handleSaveConfig = () => {
-    // In a real app, this would save to backend
     console.log('Saving configuration:', systemParams);
     alert('Configuración guardada exitosamente');
   };
@@ -137,9 +136,7 @@ const SystemConfiguration = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        {/* Left Column - System Parameters */}
         <Grid item xs={12} lg={6}>
-          {/* System Parameters */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography 
               variant="h5" 
@@ -154,7 +151,6 @@ const SystemConfiguration = () => {
             </Typography>
 
             <Grid container spacing={3}>
-              {/* Annual Interest Rate */}
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'medium' }}>
                   Tasa de Interés Anual
@@ -170,8 +166,7 @@ const SystemConfiguration = () => {
                   placeholder="10,5"
                 />
               </Grid>
-
-              {/* Maximum Loan Amount */}
+              
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'medium' }}>
                   Monto Máximo de Préstamo
@@ -188,7 +183,6 @@ const SystemConfiguration = () => {
                 />
               </Grid>
 
-              {/* Minimum Term */}
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'medium' }}>
                   Plazo Mínimo (meses)
@@ -202,7 +196,6 @@ const SystemConfiguration = () => {
                 />
               </Grid>
 
-              {/* Maximum Term */}
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'medium' }}>
                   Plazo Máximo (meses)
@@ -216,7 +209,7 @@ const SystemConfiguration = () => {
                 />
               </Grid>
 
-              {/* Save Button */}
+
               <Grid item xs={12}>
                 <Button
                   variant="contained"
@@ -231,7 +224,7 @@ const SystemConfiguration = () => {
             </Grid>
           </Paper>
 
-          {/* System Backups */}
+
           <Paper sx={{ p: 3 }}>
             <Typography 
               variant="h5" 
@@ -245,7 +238,7 @@ const SystemConfiguration = () => {
               Respaldos del Sistema
             </Typography>
 
-            {/* Database Backup Section */}
+
             <Box sx={{ mb: 4 }}>
               <Typography variant="h6" gutterBottom sx={{ fontWeight: 'medium' }}>
                 Respaldar Base de Datos
@@ -267,7 +260,7 @@ const SystemConfiguration = () => {
               />
             </Box>
 
-            {/* Recent Backups */}
+
             <Box>
               <Typography variant="h6" gutterBottom sx={{ fontWeight: 'medium' }}>
                 Respaldos Recientes
@@ -301,7 +294,7 @@ const SystemConfiguration = () => {
           </Paper>
         </Grid>
 
-        {/* Right Column - System Users */}
+
         <Grid item xs={12} lg={6}>
           <Paper sx={{ p: 3, height: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
@@ -322,14 +315,14 @@ const SystemConfiguration = () => {
             </Box>
 
             {isMobile ? (
-              // Mobile View - Cards
+
               <Box>
                 {users.map((user, index) => (
                   <MobileUserCard key={index} user={user} />
                 ))}
               </Box>
             ) : (
-              // Desktop View - Table
+
               <TableContainer>
                 <Table sx={{ minWidth: 650 }} aria-label="usuarios del sistema">
                   <TableHead sx={{ backgroundColor: theme.palette.primary.light }}>
@@ -400,7 +393,7 @@ const SystemConfiguration = () => {
               </TableContainer>
             )}
 
-            {/* Footer with country and date */}
+
             <Box sx={{ mt: 3, pt: 2, borderTop: `1px solid ${theme.palette.divider}` }}>
               <Typography variant="caption" color="textSecondary">
                 Uruguay 2023 • 13/07/2023

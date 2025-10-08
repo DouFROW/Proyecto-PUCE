@@ -22,7 +22,7 @@ const AccountingManagement = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  // Sample data - in a real app this would come from props or API
+
   const accountingData = [
     {
       fecha: '15/08/2023',
@@ -82,22 +82,27 @@ const AccountingManagement = () => {
           <Typography variant="subtitle2" color="textSecondary">Fecha</Typography>
           <Typography variant="body2">{row.fecha}</Typography>
         </Grid>
+
         <Grid item xs={6}>
           <Typography variant="subtitle2" color="textSecondary">Categoría</Typography>
           <Chip label={row.categoria} size="small" color="primary" variant="outlined" />
         </Grid>
+
         <Grid item xs={12}>
           <Typography variant="subtitle2" color="textSecondary">Descripción</Typography>
           <Typography variant="body2">{row.descripcion}</Typography>
         </Grid>
+
         <Grid item xs={4}>
           <Typography variant="subtitle2" color="textSecondary">Ingresos</Typography>
           <Typography variant="body2" color="success.main">{row.ingresos}</Typography>
         </Grid>
+
         <Grid item xs={4}>
           <Typography variant="subtitle2" color="textSecondary">Egresos</Typography>
           <Typography variant="body2" color="error.main">{row.egresos}</Typography>
         </Grid>
+
         <Grid item xs={4}>
           <Typography variant="subtitle2" color="textSecondary">Saldo</Typography>
           <Typography variant="body2" fontWeight="bold">{row.saldo}</Typography>
@@ -108,7 +113,6 @@ const AccountingManagement = () => {
 
   return (
     <Box sx={{ p: { xs: 2, md: 3 }, maxWidth: 1200, margin: '0 auto' }}>
-      {/* Header */}
       <Typography 
         variant="h4" 
         component="h1" 
@@ -122,7 +126,7 @@ const AccountingManagement = () => {
         Gestión Contable
       </Typography>
 
-      {/* Registro Contable Section */}
+
       <Typography 
         variant="h5" 
         component="h2" 
@@ -136,14 +140,12 @@ const AccountingManagement = () => {
       </Typography>
 
       {isMobile ? (
-        // Mobile View
         <Box>
           {accountingData.map((row, index) => (
             <MobileRow key={index} row={row} />
           ))}
         </Box>
       ) : (
-        // Desktop Table View
         <TableContainer component={Paper} sx={{ mb: 4 }}>
           <Table sx={{ minWidth: 650 }} aria-label="registro contable">
             <TableHead sx={{ backgroundColor: theme.palette.primary.light }}>
@@ -191,7 +193,6 @@ const AccountingManagement = () => {
 
       <Divider sx={{ my: 4 }} />
 
-      {/* Resumen Financiero Section */}
       <Typography 
         variant="h5" 
         component="h2" 
@@ -205,7 +206,6 @@ const AccountingManagement = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        {/* Balance Summary */}
         <Grid item xs={12} md={4}>
           <Card sx={{ height: '100%' }}>
             <CardContent>
@@ -237,7 +237,6 @@ const AccountingManagement = () => {
           </Card>
         </Grid>
 
-        {/* Distribución de Ingresos */}
         <Grid item xs={12} md={4}>
           <Card sx={{ height: '100%' }}>
             <CardContent>
@@ -274,7 +273,6 @@ const AccountingManagement = () => {
           </Card>
         </Grid>
 
-        {/* Distribución de Egresos */}
         <Grid item xs={12} md={4}>
           <Card sx={{ height: '100%' }}>
             <CardContent>
