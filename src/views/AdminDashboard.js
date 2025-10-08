@@ -8,6 +8,7 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import GroupIcon from '@mui/icons-material/Group';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import WelcomeHeader from '../components/WelcomeHeader';
 
 const AdminDashboard = ({ activeNav }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,15 +27,8 @@ const AdminDashboard = ({ activeNav }) => {
   ];
 
   return (
-    <Box sx={{  backgroundColor: '#f5f5f5' }}>
-      <Typography variant="h5" component="h1" sx={{ fontWeight: 'bold', mb: 1, color: '#ffffffff' , 
-        backgroundColor: '#0056b3', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderRadius: '4px',fontSize: '1,4rem',textTransform: 'none' }}>
-        Panel de Administración - AETPUCE
-      </Typography>
-      <Typography variant="body2" sx={{ mb: 3, color: '#666' }}>
-        Sistema integral para la administración de la asociación
-      </Typography>
-      
+    <Box sx={{ p:3, backgroundColor: '#f5f5f5'}}>
+      <WelcomeHeader title="Panel de Administración - AETPUCE" subtitle="Sistema integral para la administración de la asociación" />
       <Grid container spacing={3} sx={{ mb: 3 }}>
         {stats.map((stat, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
@@ -45,7 +39,7 @@ const AdminDashboard = ({ activeNav }) => {
 
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderRadius: '4px' }}>
+          <Card sx={{ boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderRadius: '6px' }}>
             <CardHeader 
               title="Préstamos Recientes"
               titleTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
