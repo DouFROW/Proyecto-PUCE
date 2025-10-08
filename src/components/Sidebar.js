@@ -12,23 +12,19 @@ const drawerWidth = 260;
 
 
 function Sidebar({ activeNav, onNavClick, isAdmin }) {
-  
-
-  // Using imported icons directly
-
-  // Common navigation items for both admin and members
+  // Vistas principales
   const navItems = [
-    { icon: HomeIcon, label: 'Inicio', view: "co" },
-    { icon: DescriptionIcon, label: 'Documentos', view: 'documents' },
-    { icon: AccountBalanceIcon, label: 'Préstamos', view: 'loans' },
-    { icon: BarChartIcon, label: 'Reportes', view: 'reports' },
+    { icon: HomeIcon, label: 'Inicio', view: 'dashboard' },
+    { icon: DescriptionIcon, label: 'Documentos', view: 'documentos' }, // ← cambio aquí
+    { icon: AccountBalanceIcon, label: 'Préstamos', view: 'prestamos' }, // ← y aquí
+    { icon: BarChartIcon, label: 'Reportes', view: 'reportes' }, // ← y aquí
   ];
 
-  // Admin-specific navigation items
+  // Vistas extra para admin
   const adminItems = [
-    { icon: CalculateIcon, label: 'Contabilidad', view: 'accounting' },
-    { icon: Groups2Icon, label: 'Socios', view: 'members' },
-    { icon: SettingsIcon, label: 'Administración', view: 'admin' },
+    { icon: MonetizationOnIcon, label: 'Contabilidad', view: 'contabilidad' },
+    { icon: GroupIcon, label: 'Socios', view: 'socios' },
+    { icon: SupervisorAccountIcon, label: 'Administración', view: 'administracion' },
   ];
 
   return (
@@ -40,7 +36,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#0056b3', // PUCESE blue from ROLES file
+          backgroundColor: '#0056b3',
           color: 'white',
           pt: 8,
         },
@@ -71,7 +67,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
-        
+
         {isAdmin && (
           <>
             {adminItems.map((item) => (
@@ -103,8 +99,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
       </List>
     </Drawer>
   );
-};
+}
 
-// Named export in addition to default export
 export { Sidebar };
 export default Sidebar;
