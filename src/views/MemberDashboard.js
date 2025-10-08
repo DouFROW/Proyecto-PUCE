@@ -73,7 +73,7 @@ const MemberDashboard = ({ activeNav }) => {
         <Grid item xs={12} md={8}>
           <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
             <CardHeader
-              title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Mis Préstamos</Typography>}
+              title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ffffffff' }}>Mis Préstamos</Typography>}
               action={<Button variant="contained" color="primary" onClick={() => setModalOpen(true)}>Solicitar Préstamo</Button>}
             />
             <Divider />
@@ -82,7 +82,7 @@ const MemberDashboard = ({ activeNav }) => {
             </CardContent>
           </Card>
           <Card sx={{ mt: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
-            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Próximos Pagos</Typography>} />
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ffffffff' }}>Próximos Pagos</Typography>} />
             <Divider />
             <CardContent>
               <Box sx={{ height: 300 }}>
@@ -93,14 +93,14 @@ const MemberDashboard = ({ activeNav }) => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
-            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Acciones Rápidas</Typography>} />
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#f1f1f1ff' }}>Acciones Rápidas</Typography>} />
             <Divider />
             <CardContent>
               <QuickActions onLoanRequest={() => setModalOpen(true)} isAdmin={false} />
             </CardContent>
           </Card>
           <Card sx={{ mt: 3, boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
-            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#0056b3' }}>Documentos Recientes</Typography>} />
+            <CardHeader title={<Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ffffffff' }}>Documentos Recientes</Typography>} />
             <Divider />
             <CardContent>
               <List>
@@ -109,7 +109,7 @@ const MemberDashboard = ({ activeNav }) => {
                     <ListItemText
                       primary={
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Typography variant="subtitle1" sx={{ fontWeight: 'medium', color: '#0056b3' }}>{doc.title}</Typography>
+                          <Typography variant="subtitle1" sx={{ fontWeight: 'medium', color: '#ffffffff' }}>{doc.title}</Typography>
                           <Typography variant="body2" color="text.secondary">{doc.date}</Typography>
                         </Box>
                       }

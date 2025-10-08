@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button, Box } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+//import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import PaymentIcon from '@mui/icons-material/Payment';
+//import PaymentIcon from '@mui/icons-material/Payment';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const QuickActions = ({ onLoanRequest, isAdmin = false }) => {
   const adminButtons = [
-    { label: 'Nuevo Préstamo', icon: AddCircleIcon, variant: 'contained', color: 'primary', onClick: onLoanRequest },
+    //{ label: 'Nuevo Préstamo', icon: AddCircleIcon, variant: 'contained', color: 'primary', onClick: onLoanRequest },
     { label: 'Registrar Socio', icon: PersonAddIcon, variant: 'outlined', color: 'primary' },
-    { label: 'Registrar Ingreso', icon: ReceiptIcon, variant: 'outlined', color: 'primary' },
+    { label: 'Aprobar Préstamo ', icon: ReceiptIcon, variant: 'outlined', color: 'primary' },
     { label: 'Generar Reporte', icon: PictureAsPdfIcon, variant: 'outlined', color: 'primary' },
   ];
 
