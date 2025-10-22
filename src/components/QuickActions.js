@@ -7,8 +7,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const QuickActions = ({ onLoanRequest, isAdmin = false }) => {
-   if (!isAdmin) return null;
-   
+  if (!isAdmin) return null;
   const adminButtons = [
     //{ label: 'Nuevo Préstamo', icon: AddCircleIcon, variant: 'contained', color: 'primary', onClick: onLoanRequest },
     { label: 'Registrar Socio', icon: PersonAddIcon, variant: 'outlined', color: 'primary' },

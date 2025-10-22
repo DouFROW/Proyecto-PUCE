@@ -25,6 +25,7 @@ import {
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { exportHtmlToPdf } from '../components/pdfUtils';
 import { 
   BarChart, 
   Bar, 
@@ -103,6 +104,7 @@ const AnnualDiscountReportPage = () => {
 
   const handleExportPDF = () => {
     console.log('Exporting annual discount report to PDF...');
+    exportHtmlToPdf('activeLoansTable', 'PrestamosActivos.pdf');
   };
 
   const COLORS = ['#8884d8', '#82ca9d', '#ffc658'];
@@ -115,6 +117,8 @@ const AnnualDiscountReportPage = () => {
           Reporte Anual de Descuentos
         </Typography>
       </Stack>
+
+
 
       <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mb: 3 }}>
         <CardHeader 
@@ -162,7 +166,8 @@ const AnnualDiscountReportPage = () => {
           </Grid>
         </CardContent>
       </Card>
-
+      
+     <div id= 'activeLoansTable'>
       {/* Resumen Ejecutivo */}
       <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mb: 3 }}>
         <CardHeader 
@@ -406,6 +411,7 @@ const AnnualDiscountReportPage = () => {
           </Grid>
         </CardContent>
       </Card>
+      </div>
     </Box>
   );
 };

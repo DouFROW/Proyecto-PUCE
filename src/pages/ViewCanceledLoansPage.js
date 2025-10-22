@@ -35,6 +35,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloseIcon from '@mui/icons-material/Close';
 import WarningIcon from '@mui/icons-material/Warning';
+import { exportHtmlToPdf } from '../components/pdfUtils';
 
 const ViewCanceledLoansPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -142,6 +143,7 @@ const ViewCanceledLoansPage = () => {
 
   const handleExportPDF = () => {
     console.log('Exporting canceled loans to PDF...');
+     exportHtmlToPdf('activeLoansTable', 'Prestamos cancelados.pdf');
   };
 
   const getReasonColor = (reason) => {
@@ -226,7 +228,7 @@ const ViewCanceledLoansPage = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+      <Card id='activeLoansTable' sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
           title={`Préstamos Cancelados (${filteredLoans.length})`}
           sx={{ backgroundColor: '#d32f2f', color: 'white' }}

@@ -38,6 +38,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloseIcon from '@mui/icons-material/Close';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import { exportHtmlToPdf } from '../components/pdfUtils';
 
 const LoansByMemberPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -226,6 +227,7 @@ const LoansByMemberPage = () => {
 
   const handleExportPDF = () => {
     console.log('Exporting loans by member to PDF...');
+    exportHtmlToPdf('activeLoansTable', 'Prestamo por socio.pdf');
   };
 
   const getStatusColor = (status) => {
@@ -320,7 +322,7 @@ const LoansByMemberPage = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+      <Card id='activeLoansTable' sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
           title={`Socios con Préstamos (${filteredMembers.length})`}
           sx={{ backgroundColor: '#0056b3', color: 'white' }}

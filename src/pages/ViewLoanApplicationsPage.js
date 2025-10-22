@@ -37,6 +37,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import WarningIcon from '@mui/icons-material/Warning';
+import { exportHtmlToPdf } from '../components/pdfUtils';
+
 
 const ViewLoanApplicationsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -151,6 +153,7 @@ const ViewLoanApplicationsPage = () => {
 
   const handleExportPDF = () => {
     console.log('Exporting loan applications to PDF...');
+    exportHtmlToPdf('activeLoansTable', 'Solicutd de prestamo.pdf');
   };
 
   const getStatusColor = (status) => {
@@ -241,7 +244,7 @@ const ViewLoanApplicationsPage = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+      <Card id="activeLoansTable" sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
           title={`Solicitudes de Préstamos (${filteredApplications.length})`}
           sx={{ backgroundColor: '#0056b3', color: 'white' }}

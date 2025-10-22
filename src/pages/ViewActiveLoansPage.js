@@ -35,6 +35,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloseIcon from '@mui/icons-material/Close';
+import { exportHtmlToPdf } from '../components/pdfUtils';
+
+
 
 const ViewActiveLoansPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -142,6 +145,7 @@ const ViewActiveLoansPage = () => {
 
   const handleExportPDF = () => {
     console.log('Exporting active loans to PDF...');
+    exportHtmlToPdf('activeLoansTable', 'PrestamosActivos.pdf');
   };
 
   const getStatusColor = (status) => {
@@ -225,7 +229,7 @@ const ViewActiveLoansPage = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+      <Card id="activeLoansTable" sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
           title={`Préstamos Activos (${filteredLoans.length})`}
           sx={{ backgroundColor: '#0056b3', color: 'white' }}
