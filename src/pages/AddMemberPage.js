@@ -30,10 +30,10 @@ const AddMemberPage = () => {
     telefono: '',
     departamento: '',
     fechaIngreso: '',
-    salario: '',
+    Numerodecuenta: '',
     direccion: '',
-    estadoCivil: '',
-    fechaNacimiento: ''
+    tipodecuenta: '',
+    nombrebank:''
   });
 
   const [errors, setErrors] = useState({});
@@ -48,14 +48,11 @@ const AddMemberPage = () => {
     'Seguridad',
     'Otro'
   ];
-
-  const estadosCiviles = [
-    'Soltero/a',
-    'Casado/a',
-    'Divorciado/a',
-    'Viudo/a',
-    'Unión Libre'
+  const tipodecuenta = [
+    'Cuenta Corriente',
+    'Cuenta Ahorro',
   ];
+
 
   const handleInputChange = (field) => (event) => {
     setFormData({
@@ -82,7 +79,7 @@ const AddMemberPage = () => {
     if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es requerido';
     if (!formData.departamento) newErrors.departamento = 'El departamento es requerido';
     if (!formData.fechaIngreso) newErrors.fechaIngreso = 'La fecha de ingreso es requerida';
-    if (!formData.salario.trim()) newErrors.salario = 'El salario es requerido';
+    if (!formData.salario.trim()) newErrors.tipodecuenta = 'El salario es requerido';
     else if (isNaN(formData.salario) || parseFloat(formData.salario) <= 0) {
       newErrors.salario = 'El salario debe ser un número válido';
     }
@@ -109,8 +106,8 @@ const AddMemberPage = () => {
           fechaIngreso: '',
           salario: '',
           direccion: '',
-          estadoCivil: '',
-          fechaNacimiento: ''
+          tipodecuenta: '',
+          nombrebank: '',
         });
         setSuccess(false);
       }, 3000);
@@ -126,10 +123,10 @@ const AddMemberPage = () => {
       telefono: '',
       departamento: '',
       fechaIngreso: '',
-      salario: '',
+      numerodecuenta: '',
       direccion: '',
-      estadoCivil: '',
-      fechaNacimiento: ''
+      tipodecuenta: '',
+      nombrebank: '',
     });
     setErrors({});
     setSuccess(false);
@@ -205,34 +202,6 @@ const AddMemberPage = () => {
               <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
-                  label="Fecha de Nacimiento"
-                  type="date"
-                  value={formData.fechaNacimiento}
-                  onChange={handleInputChange('fechaNacimiento')}
-                  InputLabelProps={{ shrink: true }}
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <FormControl fullWidth>
-                  <InputLabel>Estado Civil</InputLabel>
-                  <Select
-                    value={formData.estadoCivil}
-                    onChange={handleInputChange('estadoCivil')}
-                    label="Estado Civil"
-                  >
-                    {estadosCiviles.map((estado) => (
-                      <MenuItem key={estado} value={estado}>
-                        {estado}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
                   label="Dirección"
                   value={formData.direccion}
                   onChange={handleInputChange('direccion')}
@@ -242,7 +211,7 @@ const AddMemberPage = () => {
               </Grid>
 
               {/* Información Laboral */}
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <Typography variant="h6" gutterBottom sx={{ color: '#0056b3', fontWeight: 'bold', mt: 2 }}>
                   Información Laboral
                 </Typography>
@@ -271,7 +240,7 @@ const AddMemberPage = () => {
                 )}
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
                   label="Fecha de Ingreso"
@@ -285,17 +254,51 @@ const AddMemberPage = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
+               <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
-                  label="Salario"
-                  type="number"
-                  value={formData.salario}
-                  onChange={handleInputChange('salario')}
-                  error={!!errors.salario}
-                  helperText={errors.salario}
+                  label="Nombre del Banco"
+                  value={formData.nombrebank}
+                  onChange={handleInputChange('nombrebank')}
+                  error={!!errors.nombrebank}
+                  helperText={errors.nombrebank}
                   required
                 />
+              </Grid>
+
+              <Grid item xs={12} md={3}>
+                <TextField
+                  fullWidth
+                  label="Número de cuenta"
+                  type="number"
+                  value={formData.numerodecuenta}
+                  onChange={handleInputChange('numerodecuenta')}
+                  error={!!errors.numerodecuenta}
+                  helperText={errors.numerodecuenta}
+                  required
+                />
+              </Grid>
+
+               <Grid item xs={12} md={3}>
+                <FormControl fullWidth required error={!!errors.tipodecuenta}>
+                  <InputLabel>Tipo de cuenta</InputLabel>
+                  <Select
+                    value={formData.tipodecuenta}
+                    onChange={handleInputChange('tipodecuenta')}
+                    label="Tipo de cuenta"
+                  >
+                    {tipodecuenta.map((tdc) => (
+                      <MenuItem key={tdc} value={tdc}>
+                        {tdc}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {errors.tipodecuenta && (
+                  <Typography variant="caption" color="error" sx={{ mt: 1.5, ml: 8.75 }}>
+                    {errors.tipodecuenta}
+                  </Typography>
+                )}
               </Grid>
 
               {/* Información de Contacto */}
@@ -306,7 +309,7 @@ const AddMemberPage = () => {
                 <Divider sx={{ mb: 2 }} />
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
                   label="Email"
@@ -319,7 +322,7 @@ const AddMemberPage = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
                   label="Teléfono"

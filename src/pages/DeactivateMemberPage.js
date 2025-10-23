@@ -36,9 +36,10 @@ const DeactivateMemberPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [deactivatedMemberName, setDeactivatedMemberName] = useState('');
 
   // Sample data - in a real app this would come from your backend
-  const members = [
+  const [members, setMembers] = useState([
     {
       id: '#AET-0248',
       nombre: 'Juan Pérez',
@@ -84,7 +85,7 @@ const DeactivateMemberPage = () => {
       estado: 'Activo',
       salario: '$950.00'
     }
-  ];
+  ]);
 
   const filteredMembers = members.filter(member =>
     member.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -98,8 +99,16 @@ const DeactivateMemberPage = () => {
   };
 
   const handleConfirmDeactivation = () => {
-    // Here you would typically send the deactivation request to your backend
-    console.log('Desactivando socio:', selectedMember);
+    // Update member status to "Inactivo"
+    setMembers(prevMembers =>
+      prevMembers.map(member =>
+        member.id === selectedMember.id
+          ? { ...member, estado: 'Inactivo' }
+          : member
+      )
+    );
+    
+    setDeactivatedMemberName(selectedMember.nombre);
     setSuccess(true);
     setConfirmDialogOpen(false);
     setSelectedMember(null);
@@ -124,7 +133,7 @@ const DeactivateMemberPage = () => {
 
       {success && (
         <Alert severity="success" sx={{ mb: 3 }}>
-          ¡Socio desactivado exitosamente! El socio {selectedMember?.nombre} ha sido desactivado.
+          ¡Socio desactivado exitosamente! El socio {deactivatedMemberName} ha sido desactivado.
         </Alert>
       )}
 
@@ -154,7 +163,7 @@ const DeactivateMemberPage = () => {
       <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
           title="Lista de Socios Activos" 
-          sx={{ backgroundColor: '#0056b3', color: 'white' }}
+          sx={{ backgroundColor: '#d32f2f', color: 'white' }}
         />
         <CardContent>
           <TableContainer component={Paper}>
@@ -199,7 +208,7 @@ const DeactivateMemberPage = () => {
                       <Chip 
                         label={member.estado} 
                         size="small"
-                        color="success"
+                        color={member.estado === 'Activo' ? 'success' : 'default'}
                         variant="filled"
                       />
                     </TableCell>
@@ -210,9 +219,9 @@ const DeactivateMemberPage = () => {
                         size="small"
                         startIcon={<PersonRemoveIcon />}
                         onClick={() => handleDeactivateClick(member)}
-                        disabled={member.prestamosActivos > 0}
+                        disabled={member.prestamosActivos > 0 || member.estado === 'Inactivo'}
                       >
-                        Desactivar
+                        {member.estado === 'Inactivo' ? 'Desactivado' : 'Desactivar'}
                       </Button>
                     </TableCell>
                   </TableRow>
