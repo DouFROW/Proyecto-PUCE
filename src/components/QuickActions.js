@@ -1,22 +1,43 @@
-import React from 'react';
-import { Button, Box } from '@mui/material';
-//import AddCircleIcon from '@mui/icons-material/AddCircle';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-//import PaymentIcon from '@mui/icons-material/Payment';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import React from "react";
+import { Button, Box } from "@mui/material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
-const QuickActions = ({ onLoanRequest, isAdmin = false }) => {
+const QuickActions = ({
+  onLoanRequest,
+  onRegisterMember,
+  onGenerateReport,
+  isAdmin = false,
+}) => {
   if (!isAdmin) return null;
+
   const adminButtons = [
-    //{ label: 'Nuevo Préstamo', icon: AddCircleIcon, variant: 'contained', color: 'primary', onClick: onLoanRequest },
-    { label: 'Registrar Socio', icon: PersonAddIcon, variant: 'outlined', color: 'primary' },
-    { label: 'Aprobar Préstamo ', icon: ReceiptIcon, variant: 'outlined', color: 'primary' },
-    { label: 'Generar Reporte', icon: PictureAsPdfIcon, variant: 'outlined', color: 'primary' },
+    {
+      label: "Registrar Socio",
+      icon: PersonAddIcon,
+      variant: "outlined",
+      color: "primary",
+      onClick: onRegisterMember,
+    },
+    {
+      label: "Aprobar Préstamo ",
+      icon: ReceiptIcon,
+      variant: "outlined",
+      color: "primary",
+      onClick: onLoanRequest,
+    },
+    {
+      label: "Generar Reporte",
+      icon: PictureAsPdfIcon,
+      variant: "outlined",
+      color: "primary",
+      onClick: onGenerateReport,
+    },
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
       {adminButtons.map((btn, index) => (
         <Button
           key={index}
@@ -25,12 +46,12 @@ const QuickActions = ({ onLoanRequest, isAdmin = false }) => {
           startIcon={<btn.icon />}
           fullWidth
           onClick={btn.onClick}
-          sx={{ 
-            justifyContent: 'flex-start',
-            textTransform: 'none',
-            borderRadius: '4px',
-            padding: '8px 16px',
-            fontSize: '0.875rem'
+          sx={{
+            justifyContent: "flex-start",
+            textTransform: "none",
+            borderRadius: "4px",
+            padding: "8px 16px",
+            fontSize: "0.875rem",
           }}
         >
           {btn.label}

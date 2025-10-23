@@ -25,7 +25,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import CloseIcon from "@mui/icons-material/Close";
 import WelcomeHeader from "../components/WelcomeHeader";
 
-const AdminDashboard = ({ admin }) => {
+const AdminDashboard = ({ admin, setActiveNav }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const stats = [
@@ -94,6 +94,27 @@ const AdminDashboard = ({ admin }) => {
     },
   ];
 
+  const handleRegisterMember = () => {
+    // Usa el valor exacto que espera tu sistema de navegación
+    // Ejemplo: 'agregar-socio', 'nuevo-socio', 'add-member', etc.
+    setActiveNav("add-member");
+  };
+
+  const handleGenerateReport = () => {
+    setActiveNav("monthly-discount-report");
+  };
+
+  const handleLoanApplications = () => {
+    setActiveNav("view-loan-applications");
+  };
+
+  // Nueva función para manejar el clic en los botones de la tabla
+  const handleLoanAction = (row) => {
+    // Redirige a la página de solicitudes de préstamos con el ID de la solicitud
+    // Puedes pasar el socio como parámetro en la URL o en el estado
+    setActiveNav("view-loan-applications", { autoOpenSocio: row.Socio });
+  };
+
   return (
     <Box sx={{ p: 3, backgroundColor: "#f5f5f5" }}>
       <WelcomeHeader
@@ -129,12 +150,13 @@ const AdminDashboard = ({ admin }) => {
                     fontSize: "0.75rem",
                     textTransform: "none",
                   }}
+                  onClick={handleLoanApplications}
                 >
                   Ver todos
                 </Button>
               }
             />
-            <LoanTable rows={loanRows} />
+            <LoanTable rows={loanRows} onActionClick={handleLoanAction} />
           </Card>
         </Grid>
 
@@ -152,6 +174,8 @@ const AdminDashboard = ({ admin }) => {
             <CardContent>
               <QuickActions
                 onLoanRequest={() => setModalOpen(true)}
+                onRegisterMember={handleRegisterMember}
+                onGenerateReport={handleGenerateReport}
                 isAdmin={true}
               />
             </CardContent>
