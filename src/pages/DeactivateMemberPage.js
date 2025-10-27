@@ -37,6 +37,7 @@ const DeactivateMemberPage = () => {
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [deactivatedMemberName, setDeactivatedMemberName] = useState('');
+  const [actionType, setActionType] = useState('');
 
   // Sample data - in a real app this would come from your backend
   const [members, setMembers] = useState([
@@ -81,8 +82,8 @@ const DeactivateMemberPage = () => {
       nombre: 'Luis Vásquez',
       departamento: 'Mantenimiento',
       fechaIngreso: '15/08/2015',
-      prestamosActivos: 1,
-      estado: 'Activo',
+      prestamosActivos: 0,
+      estado: 'Inactivo',
       salario: '$950.00'
     }
   ]);
@@ -95,15 +96,18 @@ const DeactivateMemberPage = () => {
 
   const handleDeactivateClick = (member) => {
     setSelectedMember(member);
+    setActionType(member.estado === 'Inactivo' ? 'activar' : 'desactivar');
     setConfirmDialogOpen(true);
   };
 
   const handleConfirmDeactivation = () => {
-    // Update member status to "Inactivo"
+    const isActivating = selectedMember.estado === 'Inactivo';
+    
+    // Toggle member status between "Activo" and "Inactivo"
     setMembers(prevMembers =>
       prevMembers.map(member =>
         member.id === selectedMember.id
-          ? { ...member, estado: 'Inactivo' }
+          ? { ...member, estado: isActivating ? 'Activo' : 'Inactivo' }
           : member
       )
     );
@@ -127,19 +131,22 @@ const DeactivateMemberPage = () => {
       <Stack direction="row" alignItems="center" spacing={2} mb={3}>
         <PersonRemoveIcon sx={{ fontSize: 32, color: '#d32f2f' }} />
         <Typography variant="h4" fontWeight="bold" color="#d32f2f">
-          Desactivar Socio
+          Gestionar Estado de Socios
         </Typography>
       </Stack>
 
       {success && (
         <Alert severity="success" sx={{ mb: 3 }}>
-          ¡Socio desactivado exitosamente! El socio {deactivatedMemberName} ha sido desactivado.
+          {actionType === 'activar'
+            ? `¡Socio activado exitosamente! El socio ${deactivatedMemberName} ha sido reactivado.`
+            : `¡Socio desactivado exitosamente! El socio ${deactivatedMemberName} ha sido desactivado.`
+          }
         </Alert>
       )}
 
       <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px', mb: 3 }}>
         <CardHeader 
-          title="Buscar Socio a Desactivar" 
+          title="Buscar Socio" 
           sx={{ backgroundColor: '#d32f2f', color: 'white' }}
         />
         <CardContent>
@@ -162,7 +169,7 @@ const DeactivateMemberPage = () => {
 
       <Card sx={{ boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
         <CardHeader 
-          title="Lista de Socios Activos" 
+          title="Lista de Socios" 
           sx={{ backgroundColor: '#d32f2f', color: 'white' }}
         />
         <CardContent>
@@ -215,13 +222,13 @@ const DeactivateMemberPage = () => {
                     <TableCell>
                       <Button
                         variant="outlined"
-                        color="error"
+                        color={member.estado === 'Inactivo' ? 'success' : 'error'}
                         size="small"
                         startIcon={<PersonRemoveIcon />}
                         onClick={() => handleDeactivateClick(member)}
-                        disabled={member.prestamosActivos > 0 || member.estado === 'Inactivo'}
+                        disabled={member.prestamosActivos > 0}
                       >
-                        {member.estado === 'Inactivo' ? 'Desactivado' : 'Desactivar'}
+                        {member.estado === 'Inactivo' ? 'Activar' : 'Desactivar'}
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -247,11 +254,14 @@ const DeactivateMemberPage = () => {
       <Dialog open={confirmDialogOpen} onClose={handleCancelDeactivation} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <WarningIcon color="warning" />
-          Confirmar Desactivación de Socio
+          {selectedMember?.estado === 'Inactivo' ? 'Confirmar Activación de Socio' : 'Confirmar Desactivación de Socio'}
         </DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            ¿Está seguro de que desea desactivar al siguiente socio?
+            {selectedMember?.estado === 'Inactivo' 
+              ? '¿Está seguro de que desea activar al siguiente socio?'
+              : '¿Está seguro de que desea desactivar al siguiente socio?'
+            }
           </Typography>
           {selectedMember && (
             <Box sx={{ mt: 2, p: 2, backgroundColor: '#f5f5f5', borderRadius: 1 }}>
@@ -278,10 +288,18 @@ const DeactivateMemberPage = () => {
               </Grid>
             </Box>
           )}
-          <Alert severity="warning" sx={{ mt: 2 }}>
+          <Alert severity={selectedMember?.estado === 'Inactivo' ? 'info' : 'warning'} sx={{ mt: 2 }}>
             <Typography variant="body2">
-              <strong>Importante:</strong> Esta acción desactivará el socio pero NO eliminará sus datos. 
-              El socio podrá ser reactivado en el futuro si es necesario.
+              {selectedMember?.estado === 'Inactivo' ? (
+                <>
+                  <strong>Información:</strong> Esta acción reactivará el socio y podrá volver a acceder a todos los servicios.
+                </>
+              ) : (
+                <>
+                  <strong>Importante:</strong> Esta acción desactivará el socio pero NO eliminará sus datos. 
+                  El socio podrá ser reactivado en el futuro si es necesario.
+                </>
+              )}
             </Typography>
           </Alert>
         </DialogContent>
@@ -291,11 +309,11 @@ const DeactivateMemberPage = () => {
           </Button>
           <Button 
             onClick={handleConfirmDeactivation} 
-            color="error" 
+            color={selectedMember?.estado === 'Inactivo' ? 'success' : 'error'}
             variant="contained"
             startIcon={<CheckIcon />}
           >
-            Confirmar Desactivación
+            {selectedMember?.estado === 'Inactivo' ? 'Confirmar Activación' : 'Confirmar Desactivación'}
           </Button>
         </DialogActions>
       </Dialog>

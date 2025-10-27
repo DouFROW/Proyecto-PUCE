@@ -36,8 +36,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import PrintIcon from "@mui/icons-material/Print";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import WarningIcon from "@mui/icons-material/Warning";
-import { exportHtmlToPdf } from "../components/pdfUtils";
 
 const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,8 +48,7 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
     type: "",
   });
 
-  // Sample data - in a real app this would come from your backend
-  const loanApplications = [
+  const initialApplications = [
     {
       id: "SOL-2023-001",
       socio: "Carlos Mendoza",
@@ -159,9 +156,10 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
     },
   ];
 
+  const [loanApplications, setLoanApplications] = useState(initialApplications);
+
   const statusOptions = ["Pendiente", "En Revisión", "Aprobado", "Rechazado"];
 
-  // Effect para abrir automáticamente el detalle si viene desde el dashboard
   useEffect(() => {
     if (autoOpenSocio) {
       const application = loanApplications.find(
@@ -172,7 +170,7 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
         setApplicationDetailsOpen(true);
       }
     }
-  }, [autoOpenSocio]);
+  }, [autoOpenSocio, loanApplications]);
 
   const filteredApplications = loanApplications.filter((application) => {
     const matchesSearch =
@@ -196,8 +194,16 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
   };
 
   const handleApprove = (applicationId) => {
-    // Here you would typically send the approval request to your backend
-    console.log("Approving application:", applicationId);
+    setLoanApplications((prevApplications) =>
+      prevApplications.map((app) =>
+        app.id === applicationId ? { ...app, estado: "Aprobado" } : app
+      )
+    );
+    
+    if (selectedApplication && selectedApplication.id === applicationId) {
+      setSelectedApplication({ ...selectedApplication, estado: "Aprobado" });
+    }
+    
     setSuccess({
       show: true,
       message: "Solicitud aprobada exitosamente",
@@ -207,9 +213,21 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
   };
 
   const handleReject = (applicationId) => {
-    // Here you would typically send the rejection request to your backend
-    console.log("Rejecting application:", applicationId);
-    setSuccess({ show: true, message: "Solicitud rechazada", type: "error" });
+    setLoanApplications((prevApplications) =>
+      prevApplications.map((app) =>
+        app.id === applicationId ? { ...app, estado: "Rechazado" } : app
+      )
+    );
+    
+    if (selectedApplication && selectedApplication.id === applicationId) {
+      setSelectedApplication({ ...selectedApplication, estado: "Rechazado" });
+    }
+    
+    setSuccess({ 
+      show: true, 
+      message: "Solicitud rechazada", 
+      type: "error" 
+    });
     setTimeout(() => setSuccess({ show: false, message: "", type: "" }), 3000);
   };
 
@@ -218,7 +236,7 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
   };
 
   const handleExportPDF = () => {
-    exportHtmlToPdf("activeLoansTable", "Solicutd de prestamo.pdf");
+    console.log("Exportando PDF...");
   };
 
   const getStatusColor = (status) => {
@@ -429,7 +447,6 @@ const ViewLoanApplicationsPage = ({ autoOpenSocio }) => {
         </CardContent>
       </Card>
 
-      {/* Dialog de detalles de la solicitud */}
       <Dialog
         open={applicationDetailsOpen}
         onClose={handleCloseDetails}

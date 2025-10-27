@@ -160,8 +160,8 @@ const LoansByMemberPage = () => {
       ]
     },
     {
-      id: "#AET-0198",
-      nombre: "Ana Torres",
+      id: " 0801663832",
+      nombre: "JENNY MERCEDES ANCHUNDIA ESPINOZA",
       departamento: "Recursos Humanos",
       fechaIngreso: "05/11/2017",
       prestamosActivos: 1,

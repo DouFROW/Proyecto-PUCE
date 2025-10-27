@@ -43,7 +43,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
   // Gestión de Socios
   const memberManagementItems = [
     { icon: PersonAddIcon, label: 'Agregar Nuevo Socio', view: 'add-member' },
-    { icon: PersonRemoveIcon, label: 'Desactivar Socio', view: 'deactivate-member' },
+    { icon: PersonRemoveIcon, label: 'Des/Activar Socio', view: 'deactivate-member' },
     { icon: VisibilityIcon, label: 'Ver Socios Activos', view: 'view-active-members' },
   ];
 

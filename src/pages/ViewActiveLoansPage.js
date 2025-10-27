@@ -31,7 +31,6 @@ import {
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import SearchIcon from '@mui/icons-material/Search';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import EditIcon from '@mui/icons-material/Edit';
 import PrintIcon from '@mui/icons-material/Print';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloseIcon from '@mui/icons-material/Close';
@@ -300,12 +299,7 @@ const ViewActiveLoansPage = () => {
                         >
                           <VisibilityIcon />
                         </IconButton>
-                        <IconButton
-                          color="secondary"
-                          title="Editar"
-                        >
-                          <EditIcon />
-                        </IconButton>
+                       
                       </Stack>
                     </TableCell>
                   </TableRow>
