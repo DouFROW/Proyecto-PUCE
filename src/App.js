@@ -35,7 +35,7 @@ import MonthlyDiscountReportPage from "./pages/MonthlyDiscountReportPage";
 
 function App() {
   // Estado para controlar tipo de usuario y vista activa
-  const [currentView, setCurrentView] = useState("admin"); // 'admin' o 'usuario'
+  const [currentView, setCurrentView] = useState("admin"); // 'admin' o 'member'
   const [activeNav, setActiveNav] = useState("dashboard"); // vista activa en sidebar/navbar
   const [navigationData, setNavigationData] = useState(null); // Datos adicionales para navegación
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("lg"));
@@ -43,6 +43,7 @@ function App() {
   // Cambiar entre vistas admin / member
   const handleViewSwitch = () => {
     setCurrentView((prev) => (prev === "admin" ? "member" : "admin"));
+    setActiveNav("dashboard"); // Resetear a dashboard al cambiar de vista
   };
 
   // Cambiar el contenido principal según la navegación (con datos opcionales)
@@ -101,21 +102,63 @@ function App() {
           return <AdminDashboard setActiveNav={handleNavClick} />;
       }
     } else {
+      // Vista de USUARIO/MIEMBRO
       switch (activeNav) {
         case "dashboard":
-          return <MemberDashboard />;
+          return (
+            <MemberDashboard
+              activeNav={activeNav}
+              setActiveNav={handleNavClick}
+            />
+          );
         case "documentos":
           return <DocumentsPage />;
-        case "prestamos":
-          return <LoansPage />;
-        case "reportes":
-          return <ReportsPage />;
-        case "contabilidad":
-          return <ContabPage />;
-        case "administracion":
-          return <AdminsPage />;
+
+        // Mi Perfil
+        case "my-profile":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Mi Perfil</h2>
+              <p>Información personal y configuración de cuenta</p>
+              {/* Aquí puedes crear un componente MyProfilePage */}
+            </Box>
+          );
+
+        // Mis Préstamos
+        case "my-active-loans":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Mis Préstamos Activos</h2>
+              <p>Listado de tus préstamos activos</p>
+              {/* Aquí puedes usar ViewActiveLoansPage filtrado por usuario */}
+            </Box>
+          );
+
+        case "my-payment-history":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Historial de Pagos</h2>
+              <p>Registro completo de tus pagos realizados</p>
+              {/* Crear componente MyPaymentHistoryPage */}
+            </Box>
+          );
+
+        case "my-finished-loans":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Préstamos Finalizados</h2>
+              <p>Historial de préstamos que ya fueron pagados completamente</p>
+              {/* Aquí puedes usar ViewCanceledLoansPage filtrado por usuario */}
+            </Box>
+          );
+
         default:
-          return <MemberDashboard />;
+          return (
+            <MemberDashboard
+              activeNav={activeNav}
+              setActiveNav={handleNavClick}
+            />
+          );
       }
     }
   };

@@ -8,11 +8,10 @@ import {
   Box,
   List,
   ListItem,
-  ListItemText,
+  Typography,
   Divider,
   Chip,
   IconButton,
-  Typography,
 } from "@mui/material";
 import StatsCard from "../components/StatsCard";
 import LoanTable from "../components/LoanTable";
@@ -95,24 +94,27 @@ const AdminDashboard = ({ admin, setActiveNav }) => {
   ];
 
   const handleRegisterMember = () => {
-    // Usa el valor exacto que espera tu sistema de navegación
-    // Ejemplo: 'agregar-socio', 'nuevo-socio', 'add-member', etc.
-    setActiveNav("add-member");
+    if (setActiveNav) {
+      setActiveNav("add-member");
+    }
   };
 
   const handleGenerateReport = () => {
-    setActiveNav("monthly-discount-report");
+    if (setActiveNav) {
+      setActiveNav("monthly-discount-report");
+    }
   };
 
   const handleLoanApplications = () => {
-    setActiveNav("view-loan-applications");
+    if (setActiveNav) {
+      setActiveNav("view-loan-applications");
+    }
   };
 
-  // Nueva función para manejar el clic en los botones de la tabla
   const handleLoanAction = (row) => {
-    // Redirige a la página de solicitudes de préstamos con el ID de la solicitud
-    // Puedes pasar el socio como parámetro en la URL o en el estado
-    setActiveNav("view-loan-applications", { autoOpenSocio: row.Socio });
+    if (setActiveNav) {
+      setActiveNav("view-loan-applications", { autoOpenSocio: row.Socio });
+    }
   };
 
   return (
@@ -123,14 +125,14 @@ const AdminDashboard = ({ admin, setActiveNav }) => {
       />
       <Grid container spacing={3} sx={{ mb: 3 }}>
         {stats.map((stat, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid item xs={12} sm={6} md={3} key={index} width="23.5%">
             <StatsCard {...stat} />
           </Grid>
         ))}
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           <Card
             sx={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)", borderRadius: "6px" }}
           >
@@ -160,30 +162,7 @@ const AdminDashboard = ({ admin, setActiveNav }) => {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={3.5}>
-          <Card
-            sx={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)", borderRadius: "4px" }}
-          >
-            <CardHeader
-              title="Acciones Rápidas"
-              titleTypographyProps={{
-                variant: "subtitle1",
-                fontWeight: "bold",
-              }}
-            />
-            <CardContent>
-              <QuickActions
-                onLoanRequest={() => setModalOpen(true)}
-                onRegisterMember={handleRegisterMember}
-                onGenerateReport={handleGenerateReport}
-                isAdmin={true}
-              />
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Solicitudes Pendientes Widget */}
-        <Grid item xs={12} md={3.5}>
+        <Grid item xs={12} md={3} width="30%">
           <Card
             sx={{
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
@@ -260,6 +239,28 @@ const AdminDashboard = ({ admin, setActiveNav }) => {
                   </React.Fragment>
                 ))}
               </List>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={3} width="20%">
+          <Card
+            sx={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)", borderRadius: "4px" }}
+          >
+            <CardHeader
+              title="Acciones Rápidas"
+              titleTypographyProps={{
+                variant: "subtitle1",
+                fontWeight: "bold",
+              }}
+            />
+            <CardContent>
+              <QuickActions
+                onLoanRequest={() => setModalOpen(true)}
+                onRegisterMember={handleRegisterMember}
+                onGenerateReport={handleGenerateReport}
+                isAdmin={true}
+              />
             </CardContent>
           </Card>
         </Grid>
