@@ -25,6 +25,7 @@ import {
   Alert,
   Divider,
 } from "@mui/material";
+
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import PrintIcon from "@mui/icons-material/Print";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
@@ -186,7 +187,6 @@ const MonthlyDiscountReportPage = () => {
     }
   };
 
-  
   const getStatusIcon = (status) => {
     switch (status) {
       case "Aplicado":

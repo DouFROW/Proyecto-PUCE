@@ -112,14 +112,38 @@ function App() {
             />
           );
         case "documentos":
-          return <DocumentsPage />;
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Documentos</h2>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Accede a todos los documentos importantes, formatos y recursos
+                de la organización
+              </p>
+              <DocumentsPage />
+            </Box>
+          );
 
         // Mi Perfil
         case "my-profile":
           return (
             <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
               <h2>Mi Perfil</h2>
-              <p>Información personal y configuración de cuenta</p>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Gestiona tu información personal, datos de contacto y
+                configuración de cuenta
+              </p>
               {/* Aquí puedes crear un componente MyProfilePage */}
             </Box>
           );
@@ -129,8 +153,18 @@ function App() {
           return (
             <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
               <h2>Mis Préstamos Activos</h2>
-              <p>Listado de tus préstamos activos</p>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Consulta el estado actual de tus préstamos activos, saldos
+                pendientes y próximos pagos
+              </p>
               {/* Aquí puedes usar ViewActiveLoansPage filtrado por usuario */}
+              <ViewActiveLoansPage isUserView={true} />
             </Box>
           );
 
@@ -138,7 +172,16 @@ function App() {
           return (
             <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
               <h2>Historial de Pagos</h2>
-              <p>Registro completo de tus pagos realizados</p>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Revisa el registro completo de todos tus pagos realizados,
+                fechas y conceptos
+              </p>
               {/* Crear componente MyPaymentHistoryPage */}
             </Box>
           );
@@ -147,8 +190,55 @@ function App() {
           return (
             <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
               <h2>Préstamos Finalizados</h2>
-              <p>Historial de préstamos que ya fueron pagados completamente</p>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Consulta el historial de préstamos que ya han sido pagados
+                completamente
+              </p>
               {/* Aquí puedes usar ViewCanceledLoansPage filtrado por usuario */}
+              <ViewCanceledLoansPage isUserView={true} />
+            </Box>
+          );
+
+        // Reportes de Descuentos
+        case "annual-discount-report":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Reporte Anual de Descuentos</h2>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Consulta el resumen anual de tus descuentos aplicados y estado
+                de aportaciones
+              </p>
+              <AnnualDiscountReportPage isUserView={true} />
+            </Box>
+          );
+
+        case "monthly-discount-report":
+          return (
+            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+              <h2>Reporte Mensual de Descuentos</h2>
+              <p
+                style={{
+                  color: "#666",
+                  fontSize: "16px",
+                  marginBottom: "20px",
+                }}
+              >
+                Revisa el detalle mensual de tus descuentos y aportaciones
+                realizadas
+              </p>
+              <MonthlyDiscountReportPage isUserView={true} />
             </Box>
           );
 

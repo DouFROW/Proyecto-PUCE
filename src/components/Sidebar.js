@@ -75,7 +75,11 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
       view: "my-finished-loans",
     },
   ];
-
+  // Sección de reportes para usuarios
+  const userReportItems = [
+    { icon: ReceiptIcon, label: "Reporte Anual", view: "my-monthly-report" },
+    { icon: ReceiptIcon, label: "Reporte Mensual", view: "my-monthly-report" },
+  ];
   // Gestión de Socios (solo admin)
   const memberManagementItems = [
     { icon: PersonAddIcon, label: "Agregar Nuevo Socio", view: "add-member" },
@@ -127,21 +131,6 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
       label: "Reporte Mensual",
       view: "monthly-discount-report",
     },
-  ];
-
-  // Sección de reportes para usuarios
-  const userReportItems = [
-    {
-      icon: ReceiptIcon,
-      label: "Mis Aportes",
-      view: "my-contributions-report",
-    },
-    {
-      icon: AssessmentIcon,
-      label: "Estado de Cuenta",
-      view: "my-account-statement",
-    },
-    { icon: SummarizeIcon, label: "Resumen Anual", view: "my-annual-summary" },
   ];
 
   // Vistas extra para admin
@@ -252,6 +241,7 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
                 <ExpandMoreIcon />
               )}
             </ListItem>
+
             <Collapse
               in={expandedSections.myLoans}
               timeout="auto"
@@ -259,6 +249,68 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
             >
               <List component="div" disablePadding>
                 {userLoanItems.map((item) => (
+                  <ListItem
+                    key={item.view}
+                    selected={activeNav === item.view}
+                    onClick={() => onNavClick(item.view)}
+                    sx={{
+                      color: "rgba(255,255,255,0.7)",
+                      mx: 1,
+                      my: 0.5,
+                      borderRadius: 1,
+                      pl: 4,
+                      transition: "all 0.2s",
+                      cursor: "pointer",
+                      "&:hover, &.Mui-selected": {
+                        backgroundColor: "rgba(255,255,255,0.1)",
+                        color: "white",
+                        transform: "translateX(4px)",
+                      },
+                    }}
+                  >
+                    <ListItemIcon sx={{ color: "inherit", minWidth: 40 }}>
+                      <item.icon />
+                    </ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+            {/* Mis Reportes - Sección expandible */}
+            <ListItem
+              onClick={() => handleSectionToggle("myReports")}
+              sx={{
+                color: "rgba(255,255,255,0.8)",
+                mx: 1,
+                my: 0.5,
+                borderRadius: 1,
+                transition: "all 0.2s",
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  color: "white",
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: "inherit", minWidth: 40 }}>
+                <ReceiptIcon />
+              </ListItemIcon>
+              <ListItemText primary="Mis Reportes" />
+              {expandedSections.myReports ? (
+                <ExpandLessIcon />
+              ) : (
+                <ExpandMoreIcon />
+              )}
+            </ListItem>
+
+            <Collapse
+              in={expandedSections.myReports}
+              timeout="auto"
+              unmountOnExit
+            >
+              <List component="div" disablePadding>
+                {userReportItems.map((item) => (
                   <ListItem
                     key={item.view}
                     selected={activeNav === item.view}
