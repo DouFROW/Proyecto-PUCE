@@ -33,6 +33,11 @@ import LoansByMemberPage from "./pages/LoansByMemberPage";
 import AnnualDiscountReportPage from "./pages/AnnualDiscountReportPage";
 import MonthlyDiscountReportPage from "./pages/MonthlyDiscountReportPage";
 
+//USER
+import UserMonthlyDiscountReportPage from "./pages/UserMonthlyDiscountReportPage";
+import UserViewActiveLoansPage from "./pages/UserViewActiveLoansPage";
+import UserViewCanceledLoansPage from "./pages/UserViewCanceledLoansPage";
+import UserAnnualDiscountReportPage from "./pages/UserAnnualDiscountReportPage";
 function App() {
   // Estado para controlar tipo de usuario y vista activa
   const [currentView, setCurrentView] = useState("admin"); // 'admin' o 'member'
@@ -112,22 +117,7 @@ function App() {
             />
           );
         case "documentos":
-          return (
-            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
-              <h2>Documentos</h2>
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "16px",
-                  marginBottom: "20px",
-                }}
-              >
-                Accede a todos los documentos importantes, formatos y recursos
-                de la organización
-              </p>
-              <DocumentsPage />
-            </Box>
-          );
+          return <DocumentsPage />;
 
         // Mi Perfil
         case "my-profile":
@@ -150,23 +140,7 @@ function App() {
 
         // Mis Préstamos
         case "my-active-loans":
-          return (
-            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
-              <h2>Mis Préstamos Activos</h2>
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "16px",
-                  marginBottom: "20px",
-                }}
-              >
-                Consulta el estado actual de tus préstamos activos, saldos
-                pendientes y próximos pagos
-              </p>
-              {/* Aquí puedes usar ViewActiveLoansPage filtrado por usuario */}
-              <ViewActiveLoansPage isUserView={true} />
-            </Box>
-          );
+          return <UserViewActiveLoansPage isUserView={true} />;
 
         case "my-payment-history":
           return (
@@ -187,60 +161,14 @@ function App() {
           );
 
         case "my-finished-loans":
-          return (
-            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
-              <h2>Préstamos Finalizados</h2>
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "16px",
-                  marginBottom: "20px",
-                }}
-              >
-                Consulta el historial de préstamos que ya han sido pagados
-                completamente
-              </p>
-              {/* Aquí puedes usar ViewCanceledLoansPage filtrado por usuario */}
-              <ViewCanceledLoansPage isUserView={true} />
-            </Box>
-          );
+          return <UserViewCanceledLoansPage isUserView={true} />;
 
         // Reportes de Descuentos
-        case "annual-discount-report":
-          return (
-            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
-              <h2>Reporte Anual de Descuentos</h2>
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "16px",
-                  marginBottom: "20px",
-                }}
-              >
-                Consulta el resumen anual de tus descuentos aplicados y estado
-                de aportaciones
-              </p>
-              <AnnualDiscountReportPage isUserView={true} />
-            </Box>
-          );
+        case "user-annual-discount-report":
+          return <UserAnnualDiscountReportPage isUserView={true} />;
 
-        case "monthly-discount-report":
-          return (
-            <Box sx={{ p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
-              <h2>Reporte Mensual de Descuentos</h2>
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "16px",
-                  marginBottom: "20px",
-                }}
-              >
-                Revisa el detalle mensual de tus descuentos y aportaciones
-                realizadas
-              </p>
-              <MonthlyDiscountReportPage isUserView={true} />
-            </Box>
-          );
+        case "user-monthly-discount-report":
+          return <UserMonthlyDiscountReportPage isUserView={true} />;
 
         default:
           return (

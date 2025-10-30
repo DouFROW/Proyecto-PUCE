@@ -72,8 +72,16 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
   ];
   // Sección de reportes para usuarios
   const userReportItems = [
-    { icon: ReceiptIcon, label: "Reporte Anual", view: "my-monthly-report" },
-    { icon: ReceiptIcon, label: "Reporte Mensual", view: "my-monthly-report" },
+    {
+      icon: ReceiptIcon,
+      label: "Reporte Anual",
+      view: "user-annual-discount-report",
+    },
+    {
+      icon: ReceiptIcon,
+      label: "Reporte Mensual",
+      view: "user-monthly-discount-report",
+    },
   ];
   // Gestión de Socios (solo admin)
   const memberManagementItems = [
