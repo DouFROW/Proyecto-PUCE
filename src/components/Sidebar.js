@@ -52,11 +52,6 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
     { icon: DescriptionIcon, label: "Documentos", view: "documentos" },
   ];
 
-  // Opciones para usuarios normales
-  const userMenuItems = [
-    { icon: AccountCircleIcon, label: "Mi Perfil", view: "my-profile" },
-  ];
-
   // Sección de préstamos para usuarios
   const userLoanItems = [
     {
@@ -186,33 +181,6 @@ function Sidebar({ activeNav, onNavClick, isAdmin }) {
         {!isAdmin && (
           <>
             <Divider sx={{ my: 2, backgroundColor: "rgba(255,255,255,0.2)" }} />
-
-            {/* Mi Perfil */}
-            {userMenuItems.map((item) => (
-              <ListItem
-                key={item.view}
-                selected={activeNav === item.view}
-                onClick={() => onNavClick(item.view)}
-                sx={{
-                  color: "rgba(255,255,255,0.8)",
-                  mx: 1,
-                  my: 0.5,
-                  borderRadius: 1,
-                  transition: "all 0.2s",
-                  cursor: "pointer",
-                  "&:hover, &.Mui-selected": {
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    color: "white",
-                    transform: "translateX(4px)",
-                  },
-                }}
-              >
-                <ListItemIcon sx={{ color: "inherit", minWidth: 40 }}>
-                  <item.icon />
-                </ListItemIcon>
-                <ListItemText primary={item.label} />
-              </ListItem>
-            ))}
 
             {/* Mis Préstamos - Sección expandible */}
             <ListItem
